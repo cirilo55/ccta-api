@@ -13,14 +13,51 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         DB::table('categories')->insert([
-            'name' => 'Frutas',
+            'name' => 'Frontend',
             'created_at' => now(),
             'updated_at' => now()
 
         ]);
 
         DB::table('categories')->insert([
-            'name' => 'Teste Seed',
+            'name' => 'Backend',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Laravel',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Vue',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'React.js',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Python',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+
+        DB::table('categories')->insert([
+            'name' => 'Geracao de Relatorios',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Gateways de pagamentos',
             'created_at' => now(),
             'updated_at' => now()
         ]);

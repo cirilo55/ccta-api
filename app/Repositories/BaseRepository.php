@@ -32,7 +32,9 @@ abstract class BaseRepository
 
     public function create($data)
     {
-        $data = $data->toArray();
+        if(!is_array($data)){
+            $data = $data->toArray();
+        }
 
         $rules = $this->getRules();
         if (!empty($rules)) {
@@ -43,7 +45,9 @@ abstract class BaseRepository
 
     public function update(int $id, $data)
     {
-        $data = $data->toArray();
+        if(!is_array($data)){
+            $data = $data->toArray();
+        }
 
         $item = $this->model->find($id);
         if ($item) {

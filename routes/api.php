@@ -7,23 +7,26 @@ Route::get('/', function () {
     return 'Bem vindo a API de produtos!';
 });
 
-include 'api/user.php';
-include 'api/category.php';
-include 'api/product.php';
-
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/isLoged', function () {
-} )->name('isLoged');
+Route::get('/login', [AuthController::class, 'isLoged'])->name('isLoged');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware('auth:sanctum')->get('/user', function () {
-    try{
-    return auth()->user();
+include 'api/user.php';
 
-    }catch(\Exception $e){
-        return response()->json(['message' => $e->getMessage()], 401);
-    }
-})->name('user');
+Route::middleware('auth:api')->group(function () {
+    include 'api/category.php';
+    include 'api/product.php';
+
+});
+
 
 Route::fallback(function () {
-    return 'Pagina de Fallback';
+
+    return response()->json(['message' => 'Page do not exist'], 404);
 });
+/**
+Você pode usar o
+metodo auth()->attempt($credentials) para autenticar
+método auth()->user() para obter o usuário autenticado.
+Use auth()->logout() para invalidar o token
+ */

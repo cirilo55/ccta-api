@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\ProductSeeder;
+use Database\Seeders\UserProductSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(UserSeeder::class);
         $this->call(ProductSeeder::class);
+        $this->call(UserProductSeeder::class);
 
     }
 }

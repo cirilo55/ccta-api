@@ -19,37 +19,57 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = $this->productRepository->getAllWithRelations(['user']);
+        $products = $this->productRepository->getAllWithRelations(['category']);
         return $products;
     }
 
     public function create(Request $request)
     {
-        $product = $this->productRepository->getById($request);
-        return $product;
+        $product = $this->productRepository->create($request->all());
+        if ($product) {
+            return response()->json($product, 201);
+        } else {
+            return response()->json(['error' => 'Failed to create product'], 400);
+        }
     }
 
     public function store(Request $request)
     {
-        $product = $this->productRepository->create($request);
-        return $product;
+        $product = $this->productRepository->create($request->all());
+        if ($product) {
+            return response()->json($product, 201);
+        } else {
+            return response()->json(['error' => 'Failed to store product'], 400);
+        }
     }
 
     public function show($id)
     {
         $product = $this->productRepository->getById($id);
-        return $product;
+        if ($product) {
+            return response()->json($product, 200);
+        } else {
+            return response()->json(['error' => 'Product not found'], 404);
+        }
     }
 
     public function update(Request $request, $id)
     {
         $product = $this->productRepository->update($id, $request);
-        return $product;
+        if ($product) {
+            return response()->json($product, 200);
+        } else {
+            return response()->json(['error' => 'Failed to update product'], 400);
+        }
     }
 
     public function destroy($id)
     {
-        $product = $this->productRepository->delete($id);
-        return $product;
+        $deleted = $this->productRepository->delete($id);
+        if ($deleted) {
+            return response()->json(['message' => 'Product deleted'], 200);
+        } else {
+            return response()->json(['error' => 'Product not found or delete failed'], 400);
+        }
     }
 }

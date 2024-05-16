@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('price', 8, 2);
             $table->integer('stock');
-            $table->string('status')->default('available');
+            $table->boolean('status')->default(false);
 
             $table->foreignId('user_id')->constrained();
             $table->foreignId('category_id')->constrained();

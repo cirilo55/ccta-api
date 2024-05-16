@@ -14,11 +14,11 @@ class ProductSeeder extends Seeder
     public function run()
     {
         DB::table('products')->insert([
-            'name' => 'Product 1',
+            'name' => 'Automacao Solfware',
             'description' => 'This is a description for Product 1',
-            'price' => 99.99,
-            'stock' => 10,
-            'status' => 'available',
+            'price' => 299.99,
+            'stock' => 1,
+            'status' => true,
             'user_id' => 1,
             'category_id' => 1,
             'created_at' => now(),
@@ -26,13 +26,37 @@ class ProductSeeder extends Seeder
         ]);
 
         DB::table('products')->insert([
-            'name' => 'Product 2',
+            'name' => 'PDV',
             'description' => 'This is a description for Product 2',
-            'price' => 79.99,
+            'price' => 379.99,
             'stock' => 5,
-            'status' => 'available',
+            'status' => true,
             'user_id' => 1,
-            'category_id' => 1,
+            'category_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('products')->insert([
+            'name' => 'Frontend Vue',
+            'description' => 'This is a description for Product 3',
+            'price' => 999.99,
+            'stock' => 0,
+            'status' => false,
+            'user_id' => 1,
+            'category_id' => 3,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('products')->insert([
+            'name' => 'Frontend React',
+            'description' => 'This is a description for Product 4',
+            'price' => 999.99,
+            'stock' => 0,
+            'status' => false,
+            'user_id' => 1,
+            'category_id' => 4,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
