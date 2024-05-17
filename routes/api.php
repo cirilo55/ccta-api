@@ -1,16 +1,12 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+
 
 Route::get('/', function () {
     return 'Bem vindo a API de produtos!';
 });
 
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/login', [AuthController::class, 'isLoged'])->name('isLoged');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
+include 'api/auth.php';
 include 'api/user.php';
 
 Route::middleware('auth:api')->group(function () {
@@ -21,9 +17,10 @@ Route::middleware('auth:api')->group(function () {
 
 
 Route::fallback(function () {
-
     return response()->json(['message' => 'Page do not exist'], 404);
 });
+
+
 /**
 Você pode usar o
 metodo auth()->attempt($credentials) para autenticar
