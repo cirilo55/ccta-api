@@ -20,47 +20,54 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->userRepository->getAllWithRelations(['products.category']);
-        return response()->json($users, 200);
-    }
-
-    public function create(Request $request)
-    {
-        $user = $this->userRepository->getById($request->id);
-        if ($user) {
-            return response()->json($user, 200);
-        } else {
-            return response()->json(['error' => 'User not found'], 404);
-        }
+        return response()->json([
+            'users' => $users,
+            'message' => 'Usuários recuperados com sucesso!'
+        ], 200);
     }
 
     public function store(Request $request)
     {
         $user = $this->userRepository->create($request);
-        return response()->json($user, 200);
+        return response()->json([
+            'user' => $user,
+            'message' => 'Usuário criado com sucesso!'
+        ], 200);
     }
 
     public function show($id)
     {
         $user = $this->userRepository->getById($id);
-        return response()->json($user, 200);
+        return response()->json([
+            'user' => $user,
+            'message' => 'Usuário recuperado com sucesso!'
+        ], 200);
     }
 
     public function update(Request $request, $id)
     {
         $user = $this->userRepository->update($id, $request);
-        return response()->json($user, 200);
+        return response()->json([
+            'user' => $user,
+            'message' => 'Usuário atualizado com sucesso!'
+        ], 200);
     }
 
     public function destroy($id)
     {
         $this->userRepository->delete($id);
-        return response()->json(['message' => 'Deletado com sucesso'], 200);
+        return response()->json(['message' => 'Usuário deletado com sucesso!'], 200);
     }
 
     public function getProductsByUser($id)
     {
         $products = $this->userService->listProductsByUser($id);
-        return response()->json($products, 200);
+        if($products->isEmpty()){
+            return response()->json(['message' => 'Nenhum produto encontrado para este usuário'], 404);
+        }
+        return response()->json([
+            'products' => $products,
+            'message' => 'Produtos recuperados com sucesso!'
+        ], 200);
     }
-
 }

@@ -9,8 +9,7 @@ use App\Models\Product;
 class Category extends Model
 {
     protected $fillable = [
-        'name',
-        'product_id'
+        'name'
     ];
     protected $hidden = ['created_at', 'updated_at', 'product_id'];
 

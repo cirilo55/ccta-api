@@ -12,7 +12,6 @@ include 'api/user.php';
 Route::middleware('auth:api')->group(function () {
     include 'api/category.php';
     include 'api/product.php';
-
 });
 
 
