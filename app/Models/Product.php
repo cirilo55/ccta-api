@@ -14,16 +14,24 @@ class Product extends Model
         'description',
         'stock',
         'user_id',
-        'category_id'
+        'categoryName'
     ];
+    protected $hidden = ['pivot' , 'created_at', 'updated_at'];
 
     public function user()
     {
         return $this->belongsToMany(User::class);
     }
 
+
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasOne(Category::class);
+    }
+
+    //Mapeamento de dados
+    public function setUserIdAttribute($value)
+    {
+        $this->attributes['user_id'] = $value;
     }
 }

@@ -14,6 +14,7 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->insert([
             'name' => 'Frontend',
+            'product_id' => 3,
             'created_at' => now(),
             'updated_at' => now()
 
@@ -21,45 +22,36 @@ class CategorySeeder extends Seeder
 
         DB::table('categories')->insert([
             'name' => 'Backend',
+            'product_id' => 2,
+
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('categories')->insert([
             'name' => 'Laravel',
+            'product_id' => 1,
+
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('categories')->insert([
             'name' => 'Vue',
+            'product_id' => 3,
+
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('categories')->insert([
             'name' => 'React.js',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+            'product_id' => 4,
 
-        DB::table('categories')->insert([
-            'name' => 'Python',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
 
-        DB::table('categories')->insert([
-            'name' => 'Geracao de Relatorios',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('categories')->insert([
-            'name' => 'Gateways de pagamentos',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
     }
 }

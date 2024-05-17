@@ -54,7 +54,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $this->userRepository->delete($id);
-        return response()->json(null, 204);
+        return response()->json(['message' => 'Deletado com sucesso'], 200);
     }
 
     public function getProductsByUser($id)

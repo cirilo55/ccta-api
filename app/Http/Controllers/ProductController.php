@@ -35,7 +35,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $product = $this->productRepository->create($request->all());
+        $product = $this->productRepository->store($request->all());
         if ($product) {
             return response()->json($product, 201);
         } else {
@@ -55,7 +55,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product = $this->productRepository->update($id, $request);
+        $product = $this->productRepository->updateProductCategory($id, $request);
         if ($product) {
             return response()->json($product, 200);
         } else {

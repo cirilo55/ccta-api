@@ -43,7 +43,7 @@ abstract class BaseRepository
         return $this->model->create($data);
     }
 
-    public function update(int $id, $data)
+    public function update($id, $data)
     {
         if(!is_array($data)){
             $data = $data->toArray();

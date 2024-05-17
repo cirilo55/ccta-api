@@ -20,7 +20,6 @@ return new class extends Migration
             $table->boolean('status')->default(false);
 
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('category_id')->constrained();
 
             $table->timestamps();
         });

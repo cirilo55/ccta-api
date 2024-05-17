@@ -12,9 +12,10 @@ class Category extends Model
         'name',
         'product_id'
     ];
+    protected $hidden = ['created_at', 'updated_at', 'product_id'];
 
     public function product()
     {
-        return $this->hasOne(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }

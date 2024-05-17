@@ -20,7 +20,6 @@ class ProductSeeder extends Seeder
             'stock' => 1,
             'status' => true,
             'user_id' => 1,
-            'category_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -32,7 +31,6 @@ class ProductSeeder extends Seeder
             'stock' => 5,
             'status' => true,
             'user_id' => 1,
-            'category_id' => 2,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -44,7 +42,6 @@ class ProductSeeder extends Seeder
             'stock' => 0,
             'status' => false,
             'user_id' => 1,
-            'category_id' => 3,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -56,7 +53,6 @@ class ProductSeeder extends Seeder
             'stock' => 0,
             'status' => false,
             'user_id' => 1,
-            'category_id' => 4,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
