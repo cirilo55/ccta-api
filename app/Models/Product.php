@@ -13,7 +13,6 @@ class Product extends Model
         'price',
         'description',
         'stock',
-        'user_id',
         'categoryName'
     ];
     protected $hidden = ['pivot' , 'created_at', 'updated_at'];
@@ -30,6 +29,13 @@ class Product extends Model
     }
 
     //Mapeamento de dados
+    // Accessor for userId
+    public function getUserIdAttribute()
+    {
+        return $this->attributes['user_id'];
+    }
+
+    // Mutator for userId
     public function setUserIdAttribute($value)
     {
         $this->attributes['user_id'] = $value;

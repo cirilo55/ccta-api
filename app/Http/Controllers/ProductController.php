@@ -54,6 +54,7 @@ class ProductController extends Controller
 
     public function show($id)
     {
+
         $product = $this->productRepository->getById($id);
         if ($product) {
             return response()->json([
@@ -67,7 +68,12 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        if($this->productRepository->getById($id) === null){
+            return response()->json(['message' => 'Produto não encontrado'], 404);
+        }
+
         $product = $this->productRepository->updateProductCategory($id, $request);
+
         if ($product) {
             return response()->json([
                 'product' => $product,
@@ -80,6 +86,10 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
+        if($this->productRepository->getById($id) === null){
+            return response()->json(['message' => 'Produto não encontrado'], 404);
+        }
+
         $deleted = $this->productRepository->delete($id);
         if ($deleted) {
             return response()->json(['message' => 'Produto deletado com sucesso!'], 200);

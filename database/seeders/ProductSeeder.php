@@ -19,7 +19,6 @@ class ProductSeeder extends Seeder
             'price' => 299.99,
             'stock' => 1,
             'status' => true,
-            'user_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -30,7 +29,6 @@ class ProductSeeder extends Seeder
             'price' => 379.99,
             'stock' => 5,
             'status' => true,
-            'user_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -41,7 +39,6 @@ class ProductSeeder extends Seeder
             'price' => 999.99,
             'stock' => 0,
             'status' => false,
-            'user_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -52,7 +49,6 @@ class ProductSeeder extends Seeder
             'price' => 999.99,
             'stock' => 0,
             'status' => false,
-            'user_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

@@ -16,16 +16,37 @@ class ProductRepository extends BaseRepository
         return $this->model;
     }
 
+    public function getRelationsManytoMany()
+    {
+    return $this->relationsManyToMany;
+    }
+
+    protected $relationsManyToMany = ['user'];
+
     public function store(array $data)
     {
+        // Se user_id não for um array, converta-o em um
+        $user_ids = isset($data['user_id']) ? (array) $data['user_id'] : [];
+
+        // Remova user_id do array de dados antes de criar o produto
+        unset($data['user_id']);
+
+        // Crie o produto
         $product = $this->model->create($data);
 
+        // Se categoryName estiver definido, crie a categoria
         if(isset($data['categoryName'])){
-            $category = array("name" => $data['categoryName'], "ProductId" => $product->id);
-            $category = Category::create($category);
-            unset($data['categoryName']);
+            $category = Category::create([
+                "name" => $data['categoryName'],
+                "ProductId" => $product->id
+            ]);
             $product->load('category');
+        }
 
+        // Anexe os usuários ao produto
+        if(!empty($user_ids)){
+            $product->user()->sync($user_ids);
+            $product->load('user');
         }
 
         return $product;

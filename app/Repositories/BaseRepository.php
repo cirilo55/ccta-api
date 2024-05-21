@@ -5,6 +5,7 @@ namespace App\Repositories;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Exception;
 
 abstract class BaseRepository
 {
@@ -87,5 +88,14 @@ abstract class BaseRepository
     public function getRules($id = null)
     {
         return [];
+    }
+
+    public function attachRelations($model, $relation, $ids)
+    {
+        if (method_exists($model, $relation)) {
+            $model->$relation()->attach($ids);
+        } else {
+            throw new Exception("Relação {$relation} não existe no modelo " . get_class($model));
+        }
     }
 }

@@ -46,21 +46,32 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $user = $this->userRepository->getById($id);
+        if($user === null){
+            return response()->json(['message' => 'Usuário não encontrado'], 404);
+        }
+
         $user = $this->userRepository->update($id, $request);
         return response()->json([
             'user' => $user,
-            'message' => 'Usuário atualizado com sucesso!'
+            'message' => "Usuário {$user->name} atualizado com sucesso!"
         ], 200);
     }
 
     public function destroy($id)
     {
+        $user = $this->userRepository->getById($id);
+        if($user === null){
+            return response()->json(['message' => 'Usuário não encontrado'], 404);
+        }
+
         $this->userRepository->delete($id);
-        return response()->json(['message' => 'Usuário deletado com sucesso!'], 200);
+        return response()->json(['message' => "Usuário {$user->name} deletado com sucesso!"], 200);
     }
 
     public function getProductsByUser($id)
     {
+
         $products = $this->userService->listProductsByUser($id);
         if($products->isEmpty()){
             return response()->json(['message' => 'Nenhum produto encontrado para este usuário'], 404);

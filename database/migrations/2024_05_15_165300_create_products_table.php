@@ -19,8 +19,6 @@ return new class extends Migration
             $table->integer('stock');
             $table->boolean('status')->default(false);
 
-            $table->foreignId('user_id')->constrained();
-
             $table->timestamps();
         });
     }
