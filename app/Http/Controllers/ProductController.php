@@ -55,7 +55,7 @@ class ProductController extends Controller
     public function show($id)
     {
 
-        $product = $this->productRepository->getById($id);
+        $product = $this->productRepository->getByIdWithRelations($id, ['category', 'user']);
         if ($product) {
             return response()->json([
                 'product' => $product,

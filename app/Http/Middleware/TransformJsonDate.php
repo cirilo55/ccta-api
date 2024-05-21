@@ -9,10 +9,11 @@ class TransformJsonDate
     public function handle($request, Closure $next)
     {
         $response = $next($request);
-
+        if (method_exists($response, 'getData')) {
         if ($response->getData()) {
             $data = $response->getData(true);
             $response->setData($this->transformDatesInData($data));
+        }
         }
 
         return $response;

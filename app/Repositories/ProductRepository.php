@@ -25,16 +25,12 @@ class ProductRepository extends BaseRepository
 
     public function store(array $data)
     {
-        // Se user_id não for um array, converta-o em um
         $user_ids = isset($data['user_id']) ? (array) $data['user_id'] : [];
 
-        // Remova user_id do array de dados antes de criar o produto
         unset($data['user_id']);
 
-        // Crie o produto
         $product = $this->model->create($data);
 
-        // Se categoryName estiver definido, crie a categoria
         if(isset($data['categoryName'])){
             $category = Category::create([
                 "name" => $data['categoryName'],
@@ -43,7 +39,6 @@ class ProductRepository extends BaseRepository
             $product->load('category');
         }
 
-        // Anexe os usuários ao produto
         if(!empty($user_ids)){
             $product->user()->sync($user_ids);
             $product->load('user');
@@ -52,31 +47,42 @@ class ProductRepository extends BaseRepository
         return $product;
     }
 
-    public function updateProductCategory($id,$data)
+    public function updateProductCategory($id, $data)
     {
+        $product = Product::find($id);
+        $categoryId = $product->category->id;
 
-        $product = $this->model->find($id);
-
-        if (isset($data['categoryName'])) {
-            $categories = Category::all();
-
-                foreach ($categories as $category) {
-                    if ($category->product_id == $product->id) {
-
-                        $category->name = $data['categoryName'];
-                        $category->save();
-                    }
-                }
-
-            unset($data['categoryName']);
+        if (!$product) {
+            return null; // or throw an exception, depending on your error handling
         }
 
-        if(!is_array($data)){
-            $data = $data->toArray();
+        $product->update([
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'price' => $data['price'],
+            'stock' => $data['stock'],
+        ]);
+
+        if (isset($data['nameCategory'])) {
+            if($categoryId){
+                $category = Category::find($categoryId);
+                $category->update([
+                    'name' => $data['nameCategory']
+                ]);
+            }else{
+                $category = Category::create([
+                    'name' => $data['nameCategory'],
+                    'ProductId' => $product->id
+                ]);
+            }
+            $product->load('category');
         }
 
-        $product->update($data);
-        $product->load('category');
+        if (!empty($data['user_id'])) {
+            $product->user()->sync($data['user_id']);
+            $product->load('user');
+        }
+
         return $product;
     }
 

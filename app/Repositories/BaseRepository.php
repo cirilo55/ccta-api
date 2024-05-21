@@ -31,6 +31,11 @@ abstract class BaseRepository
         return $this->model->find($id);
     }
 
+    public function getByIdWithRelations($id, array $relations)
+    {
+        return $this->model->with($relations)->find($id);
+    }
+
     public function create($data)
     {
         if(!is_array($data)){

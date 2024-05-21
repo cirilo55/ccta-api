@@ -37,7 +37,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = $this->userRepository->getById($id);
+        $user = $this->userRepository->getByIdWithRelations($id, ['products.category']);
         return response()->json([
             'user' => $user,
             'message' => 'Usuário recuperado com sucesso!'
